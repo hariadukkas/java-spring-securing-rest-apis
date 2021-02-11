@@ -1,8 +1,6 @@
 package io.jzheaux.springsecurity.resolutions;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,7 +9,8 @@ import java.util.Collection;
 import java.util.UUID;
 
 @Entity(name="users")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class User implements Serializable {
 

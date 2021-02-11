@@ -21,24 +21,23 @@ import javax.sql.DataSource;
 import java.util.List;
 
 @SpringBootApplication
-public class ResolutionsApplication  extends WebSecurityConfigurerAdapter {
-
-	final
-	DataSource dataSource;
-
-	public ResolutionsApplication(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
-
-	public static void main(String[] args) {
-		SpringApplication.run(ResolutionsApplication.class, args);
-	}
+public class ResolutionsApplication extends WebSecurityConfigurerAdapter {
 
 
-	@Override
-	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.jdbcAuthentication().dataSource(dataSource);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ResolutionsApplication.class, args);
+    }
+
+    @Bean
+    UserDetailsService userDetailsService(UserRepository users) {
+        return new UserRepositoryUserDetailsService(users);
+    }
+
+
+//    @Bean
+//    UserDetailsService userDetailsService(DataSource dataSource) {
+//        return new JdbcUserDetailsManager(dataSource);
+//    }
 
 
 	@Override
@@ -48,6 +47,7 @@ public class ResolutionsApplication  extends WebSecurityConfigurerAdapter {
 						.mvcMatchers(HttpMethod.GET, "/resolutions", "/resolution/**").hasAuthority("resolution:read")
 						.anyRequest().hasAuthority("resolution:write"))
 				.httpBasic(basic -> {});
+		http.cors().and().csrf().disable();
 	}
 
 }
