@@ -1,11 +1,15 @@
 package io.jzheaux.springsecurity.resolutions;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.SmartInitializingSingleton;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.security.SecureRandom;
 import java.util.UUID;
 
 @Component
+@Slf4j
 public class ResolutionInitializer implements SmartInitializingSingleton {
 	private final ResolutionRepository resolutions;
 

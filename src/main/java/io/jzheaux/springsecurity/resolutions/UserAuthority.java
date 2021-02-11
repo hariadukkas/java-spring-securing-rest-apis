@@ -2,6 +2,7 @@ package io.jzheaux.springsecurity.resolutions;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import java.util.UUID;
